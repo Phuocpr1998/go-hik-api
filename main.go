@@ -2,15 +2,16 @@ package main
 
 import (
 	"github.com/golang/glog"
-
 )
 
-func main(){
+func main() {
 	soap := SOAP{
-		User:"admin",
-		Password:"Admin123",
-		Address: "http://admin:Admin123@192.168.1.64/ISAPI/System/capabilities",
+		User:          "admin",
+		Password:      "Admin123",
+		DeviceAddress: "http://192.168.1.64",
+		Uri:           "/ISAPI/System/capabilities",
+		Method:        "GET",
 	}
-	re, _ := soap.SendRequest("http://admin:Admin123@192.168.1.64/ISAPI/System/capabilities")
+	re, _ := soap.SendRequest()
 	glog.Info(re)
 }
