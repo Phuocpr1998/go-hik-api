@@ -1,4 +1,4 @@
-package main
+package hik_api
 
 import (
 	"errors"
@@ -73,7 +73,7 @@ func (soap SOAP) SendRequest() (mxj.Map, error) {
 
 func (soap SOAP) createRequest() string {
 	// Create request envelope
-	request := `<?xml version="1.0" encoding="UTF-8"?>`
+	request := `<?xml version="1.0" encoding="UTF-8"?>` + soap.Body
 
 	// Clean request
 	request = regexp.MustCompile(`\>\s+\<`).ReplaceAllString(request, "><")
