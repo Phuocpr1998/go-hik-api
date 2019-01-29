@@ -1,10 +1,12 @@
 package main
 
 import (
+	"errors"
 	"github.com/clbanning/mxj"
 	"github.com/golang/glog"
 	digest "github.com/xinsnake/go-http-digest-auth-client"
 	"io/ioutil"
+	"net/http"
 	"regexp"
 )
 
@@ -32,6 +34,26 @@ func (soap SOAP) SendRequest() (mxj.Map, error) {
 		return mapResponse, err
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode == http.StatusUnauthorized {
+		return mapResponse, errors.New("Unauthorized")
+	} else if resp.StatusCode == http.StatusNoContent {
+		return mapResponse, errors.New("NoContent")
+	} else if resp.StatusCode == http.StatusMovedPermanently {
+		return mapResponse, errors.New("Moved Permanently")
+	} else if resp.StatusCode == http.StatusBadRequest {
+		return mapResponse, errors.New("Bad Request")
+	} else if resp.StatusCode == http.StatusForbidden {
+		return mapResponse, errors.New("Forbidden")
+	} else if resp.StatusCode == http.StatusNotFound {
+		return mapResponse, errors.New("Not Found")
+	} else if resp.StatusCode == http.StatusMethodNotAllowed {
+		return mapResponse, errors.New("Method Not Allowed")
+	} else if resp.StatusCode == http.StatusServiceUnavailable {
+		return mapResponse, errors.New("Service Unavailable")
+	} else if resp.StatusCode == http.StatusInternalServerError {
+		return mapResponse, errors.New("Status Internal Server Error")
+	}
 
 	// Read response body
 	responseBody, err := ioutil.ReadAll(resp.Body)
