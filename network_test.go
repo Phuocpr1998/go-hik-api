@@ -1,7 +1,6 @@
 package hik_api
 
 import (
-	"github.com/golang/glog"
 	"testing"
 )
 
@@ -14,6 +13,6 @@ func TestNetwork_EnableOnvif(t *testing.T) {
 
 	err := device.EnableOnvif(true)
 	if err != nil {
-		glog.Info(err)
+		t.Error(err)
 	}
 }

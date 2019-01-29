@@ -13,9 +13,6 @@ func (device Device) EnableMotionEvent(isEnable bool) error {
 		Body: `<MotionDetection xmlns="http://www.hikvision.com/ver20/XMLSchema" version="2.0">
 					<enabled>` + boolToString(isEnable) + `</enabled>
 					<enableHighlight>true</enableHighlight>
-					<samplingInterval>2</samplingInterval>
-					<startTriggerTime>500</startTriggerTime>
-					<endTriggerTime>500</endTriggerTime>
 					<regionType>grid</regionType>
 					<Grid>
 						<rowGranularity>18</rowGranularity>

@@ -1,7 +1,6 @@
 package hik_api
 
 import (
-	"github.com/golang/glog"
 	"testing"
 )
 
@@ -14,6 +13,6 @@ func TestEvents_EnableMotionEvent(t *testing.T) {
 
 	err := device.EnableMotionEvent(true)
 	if err != nil {
-		glog.Info(err)
+		t.Error(err)
 	}
 }
